@@ -5,6 +5,9 @@ import {
   TODOS_CHANGE_DONE_START,
   TODOS_CHANGE_DONE_SUCCESS,
   TODOS_CHANGE_DONE_ERROR,
+  TODOS_DELETE_START,
+  TODOS_DELETE_SUCCESS,
+  TODOS_DELETE_ERROR,
 } from '../constants/ActionTypes';
 import { call ,put, takeLatest, takeEvery, all } from 'redux-saga/effects';
 import axios from 'axios';
@@ -19,10 +22,6 @@ export function* fetchTodos(action) {
   }
 }
 
-function* watchFetchTodos() {
-  yield takeLatest(TODOS_FETCH_START, fetchTodos);
-}
-
 export function* changeTodoDone(action) {
   try {
     const todoId = action.payload.id;
@@ -33,15 +32,31 @@ export function* changeTodoDone(action) {
   }
 }
 
+export function* deleteTodo(action) {
+  try {
+    yield call(axios.delete, `https://jsonplaceholder.typicode.com/todos/${action.payload}`);
+    yield put({type: TODOS_DELETE_SUCCESS, payload: action.payload});
+  } catch (error) {
+    yield put({type: TODOS_DELETE_ERROR, payload: error});
+  }
+}
+
+function* watchFetchTodos() {
+  yield takeLatest(TODOS_FETCH_START, fetchTodos);
+}
+
 function* watchChangeTodoDone() {
   yield takeEvery(TODOS_CHANGE_DONE_START, changeTodoDone);
 }
 
-
+function* watchDeleteTodo() {
+  yield takeEvery(TODOS_DELETE_START, deleteTodo);
+}
 
 export default function* rootSaga() {
   yield all([
     watchFetchTodos(),
     watchChangeTodoDone(),
+    watchDeleteTodo(),
   ]);
 }

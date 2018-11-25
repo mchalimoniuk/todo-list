@@ -11,6 +11,7 @@ import rootSaga from '../sagas';
 import TodoList from './TodoList';
 import TodoAdd from './TodoAdd';
 import TodoLeftCounter from './TodoLeftCounter';
+import TodoDeleteCompeletedBtn from './TodoDeleteCompeletedBtn';
 
 import '../reset.css';
 
@@ -57,6 +58,7 @@ class App extends Component {
             <TodosContainer>
               <TodoList />
               <TodoAdd />
+              <TodoDeleteCompeletedBtn />
             </TodosContainer>
           </MainContainer>
         </AppContainer>
