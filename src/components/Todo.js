@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import checkboxEmpty from '../assets/checkbox-empty.svg';
 import checkboxChecked from '../assets/checkbox-checked.svg';
 
-const Todo = ({ title, done }) => {
+const Todo = ({ id, title, done, setDone, todoObj }) => {
   const TodoContainer = styled.div`
     display: flex;
     margin-bottom: 22px;
@@ -20,8 +20,8 @@ const Todo = ({ title, done }) => {
 
   const renderCheckboxIcon = () => {
     return done
-      ? <Checkbox src={checkboxChecked} alt="checkbox-checked" />
-      : <Checkbox src={checkboxEmpty} alt="checkbox-empty" />
+      ? <Checkbox src={checkboxChecked} alt="checkbox-checked" onClick={() => setDone({ ...todoObj, completed: !done })} />
+      : <Checkbox src={checkboxEmpty} alt="checkbox-empty" onClick={() => setDone({ ...todoObj, completed: !done })} />
   }
 
   return (
@@ -33,8 +33,11 @@ const Todo = ({ title, done }) => {
 };
 
 Todo.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   done: PropTypes.bool.isRequired,
+  setDone: PropTypes.func.isRequired,
+  todoObj: PropTypes.object.isRequired,
 };
 
 export default Todo;

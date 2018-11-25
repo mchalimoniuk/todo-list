@@ -2,6 +2,7 @@ import {
   TODOS_FETCH_START,
   TODOS_FETCH_SUCCESS,
   TODOS_FETCH_ERROR,
+  TODOS_CHANGE_DONE_SUCCESS,
 } from '../constants/ActionTypes';
 
 const defaultState = {
@@ -20,6 +21,14 @@ export default function(state = defaultState, action) {
     }
     case TODOS_FETCH_ERROR: {
       return { ...state, pending: false, error: action.payload };
+    }
+    case TODOS_CHANGE_DONE_SUCCESS: {
+      const todos = state.todos.map(todo => {
+        return todo.id === action.payload
+          ? { ...todo, completed: !todo.completed }
+          : todo;
+      });
+      return { ...state, todos };
     }
     default: {
       return state;
