@@ -13,6 +13,9 @@ const Todo = ({ id, title, done, setDone, todoObj }) => {
   const Checkbox = styled.img`
     align-self: center;
     margin-right: 30px;
+    &:hover {
+      cursor: pointer;
+    }
   `;
   const TodoTile = styled.span`
     align-self: center;

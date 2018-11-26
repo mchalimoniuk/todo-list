@@ -14,7 +14,7 @@ const TodoLeftCounter = props => {
   const getCountText = () => {
     const todosCount = props.todos.filter(todo => !todo.completed).length;
       if (todosCount === 0) {
-        return 'Wszystkie zadania zakończone';
+        return '🎉 Wszystkie zadania zakończone';
       } else if (todosCount === 1) {
         return '1 niezakończone zadanie';
       } else if (todosCount >= 2 && todosCount <= 4) {
