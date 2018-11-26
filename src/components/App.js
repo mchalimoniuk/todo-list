@@ -13,7 +13,7 @@ import TodoAdd from './TodoAdd';
 import TodoLeftCounter from './TodoLeftCounter';
 import TodoDeleteCompeletedBtn from './TodoDeleteCompeletedBtn';
 
-import '../reset.css';
+import '../assets/reset.css';
 
 
 const sagaMiddleware = createSagaMiddleware();
