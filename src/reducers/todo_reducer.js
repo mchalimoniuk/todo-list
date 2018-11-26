@@ -4,12 +4,15 @@ import {
   TODOS_FETCH_ERROR,
   TODOS_CHANGE_DONE_SUCCESS,
   TODOS_DELETE_SUCCESS,
+  TODOS_CREATE_SUCCESS,
+  TODOS_NEW_TODO_TITLE_CHANGE,
 } from '../constants/ActionTypes';
 
 const defaultState = {
   todos: [],
   pending: false,
   error: null,
+  newTodoTitle: '',
 };
 
 export default function(state = defaultState, action) {
@@ -36,6 +39,14 @@ export default function(state = defaultState, action) {
         return todo.id !== action.payload
       });
       return { ...state, todos };
+    }
+    case TODOS_CREATE_SUCCESS: {
+      const todos = [ ...state.todos, action.payload ];
+      return { ...state, todos, newTodoTitle: '' };
+    }
+    case TODOS_NEW_TODO_TITLE_CHANGE: {
+      const newTodoTitle = action.payload;
+      return { ...state, newTodoTitle };
     }
     default: {
       return state;
