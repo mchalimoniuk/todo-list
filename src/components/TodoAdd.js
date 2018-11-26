@@ -21,6 +21,7 @@ const CheckboxEmpty = styled.img`
 const NewTodoForm = styled.form`
   width: 100%;
 `;
+const NewTotoGroup = styled.div``;
 const NewTodoInput = styled.input`
   align-self: center;
   width: 100%;
@@ -30,11 +31,22 @@ const NewTodoInput = styled.input`
   font-size: 20px;
   color: #edf2f4;
 `;
+const NewTodoError = styled.div`
+  color: #f47382;
+  font-size: 14px;
+`;
+
+const maxTotoCountError = 'Maksymalna liczba zadań, usuń coś, żeby móc dodać nowe.';
 
 class TodoAdd extends Component {
   onNewTodoSubmit(e) {
     e.preventDefault();
-    this.props.createTodo(this.props.newTodoTitle);
+    const todosCount = this.props.todos.length;
+    if(todosCount < 10) {
+      this.props.createTodo(this.props.newTodoTitle);
+    } else {
+      alert(maxTotoCountError);
+    }
   }
 
   onNewTodoTitleChange(e) {
@@ -46,11 +58,14 @@ class TodoAdd extends Component {
       <AddTodoContainer>
         <CheckboxEmpty src={add} alt="add" />
         <NewTodoForm onSubmit={this.onNewTodoSubmit.bind(this)}>
-          <NewTodoInput
-            placeholder="Dodaj zadanie"
-            value={this.props.newTodoTitle}
-            onChange={this.onNewTodoTitleChange.bind(this)}
-          />
+          <NewTotoGroup>
+            <NewTodoInput
+              placeholder="Dodaj zadanie"
+              value={this.props.newTodoTitle}
+              onChange={this.onNewTodoTitleChange.bind(this)}
+            />
+            { this.props.todos.length >= 10 && <NewTodoError>{maxTotoCountError}</NewTodoError>}
+          </NewTotoGroup>
         </NewTodoForm>
       </AddTodoContainer>
     );
