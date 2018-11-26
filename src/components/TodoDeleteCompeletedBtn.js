@@ -1,8 +1,7 @@
 import { TODOS_DELETE_START } from '../constants/ActionTypes';
 
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -19,20 +18,18 @@ const DeleteCompletedBtn = styled.button`
   }
 `;
 
-class TodoDeleteCompeletedBtn extends Component {
-  dispatchDeleteAllCompletedTodos() {
-    this.props.todos.forEach(todo => {
+const TodoDeleteCompeletedBtn = props => {
+  const dispatchDeleteAllCompletedTodos = () => {
+    props.todos.forEach(todo => {
       if (todo.completed)
-        this.props.deleteTodo(todo.id);
+        props.deleteTodo(todo.id);
     });
   }
 
-  render() {
-    return (
-      <DeleteCompletedBtn onClick={this.dispatchDeleteAllCompletedTodos.bind(this)}>Usuń zakończone zadania</DeleteCompletedBtn>
-    );
-  }
-}
+  return (
+    <DeleteCompletedBtn onClick={dispatchDeleteAllCompletedTodos}>Usuń zakończone zadania</DeleteCompletedBtn>
+  );
+};
 
 TodoDeleteCompeletedBtn.propTypes = {
 

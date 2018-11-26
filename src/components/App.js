@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
@@ -22,53 +22,48 @@ const store = createStore(reducers, composeWithDevTools(
 ));
 sagaMiddleware.run(rootSaga);
 
+const AppContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: #edf2f4;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+`;
+const MainContainer = styled.div`
+  flex-basis: 600px;
+  background-color: #2b2d42;
+  color: #edf2f4;
+  padding: 16px;
+  box-shadow: 2px 0px 15px 0px rgba(0,0,0,0.75);
+`;
+const TodosContainer = styled.div`
+  padding: 44px;
+`;
+const TodosHeader = styled.h1`
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 0.8em;
+`;
 
-class App extends Component {
-  render() {
-    const AppContainer = styled.div`
-      display: flex;
-      justify-content: center;
-      background-color: #edf2f4;
-      min-height: 100vh;
-      font-family: 'Montserrat', sans-serif;
-    `;
-    const MainContainer = styled.div`
-      flex-basis: 600px;
-      background-color: #2b2d42;
-      color: #edf2f4;
-      padding: 16px;
-      box-shadow: 2px 0px 15px 0px rgba(0,0,0,0.75);
-    `;
-    const TodosContainer = styled.div`
-      padding: 44px;
-    `;
-    const TodosHeader = styled.h1`
-      font-size: 28px;
-      font-weight: 600;
-      text-align: center;
-      margin-bottom: 0.8em;
-    `;
-
-    return (
-      <Provider store={store}>
-        <AppContainer>
-          <MainContainer>
-            <TodosHeader>TODO List</TodosHeader>
-            <TodoLeftCounter />
-            <TodosContainer>
-              <TodoList />
-              <TodoAdd />
-              <TodoDeleteCompeletedBtn />
-            </TodosContainer>
-          </MainContainer>
-        </AppContainer>
-      </Provider>
-    );
-  }
-}
-
-App.propTypes = {
-
+const App = props => {
+  return (
+    <Provider store={store}>
+      <AppContainer>
+        <MainContainer>
+          <TodosHeader>TODO List</TodosHeader>
+          <TodoLeftCounter />
+          <TodosContainer>
+            <TodoList />
+            <TodoAdd />
+            <TodoDeleteCompeletedBtn />
+          </TodosContainer>
+        </MainContainer>
+      </AppContainer>
+    </Provider>
+  );
 };
+
+App.propTypes = {};
 
 export default App;

@@ -1,7 +1,6 @@
 import { TODOS_FETCH_START, TODOS_CHANGE_DONE_START } from '../constants/ActionTypes';
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 

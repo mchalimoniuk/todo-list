@@ -1,8 +1,7 @@
 import { TODOS_CREATE_START, TODOS_NEW_TODO_TITLE_CHANGE } from '../constants/ActionTypes';
 
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import add from '../assets/plus.svg';
@@ -38,39 +37,37 @@ const NewTodoError = styled.div`
 
 const maxTotoCountError = 'Maksymalna liczba zadań, usuń coś, żeby móc dodać nowe.';
 
-class TodoAdd extends Component {
-  onNewTodoSubmit(e) {
+const TodoAdd = props => {
+  const onNewTodoSubmit = e => {
     e.preventDefault();
-    const todosCount = this.props.todos.length;
+    const todosCount = props.todos.length;
     if(todosCount < 10) {
-      this.props.createTodo(this.props.newTodoTitle);
+      props.createTodo(props.newTodoTitle);
     } else {
       alert(maxTotoCountError);
     }
   }
 
-  onNewTodoTitleChange(e) {
-    this.props.onNewTodoTitleChange(e.target.value);
+  const onNewTodoTitleChange = e => {
+    props.onNewTodoTitleChange(e.target.value);
   }
 
-  render() {
-    return (
-      <AddTodoContainer>
-        <CheckboxEmpty src={add} alt="add" />
-        <NewTodoForm onSubmit={this.onNewTodoSubmit.bind(this)}>
-          <NewTotoGroup>
-            <NewTodoInput
-              placeholder="Dodaj zadanie"
-              value={this.props.newTodoTitle}
-              onChange={this.onNewTodoTitleChange.bind(this)}
-            />
-            { this.props.todos.length >= 10 && <NewTodoError>{maxTotoCountError}</NewTodoError>}
-          </NewTotoGroup>
-        </NewTodoForm>
-      </AddTodoContainer>
-    );
-  }
-}
+  return (
+    <AddTodoContainer>
+      <CheckboxEmpty src={add} alt="add" />
+      <NewTodoForm onSubmit={onNewTodoSubmit}>
+        <NewTotoGroup>
+          <NewTodoInput
+            placeholder="Dodaj zadanie"
+            value={props.newTodoTitle}
+            onChange={onNewTodoTitleChange}
+          />
+          { props.todos.length >= 10 && <NewTodoError>{maxTotoCountError}</NewTodoError>}
+        </NewTotoGroup>
+      </NewTodoForm>
+    </AddTodoContainer>
+  );
+};
 
 TodoAdd.propTypes = {};
 
