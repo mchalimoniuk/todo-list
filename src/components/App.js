@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import styled from 'styled-components';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { ToastContainer } from 'react-toastify';
 
 import reducers from '../reducers';
 import rootSaga from '../sagas';
@@ -14,6 +15,7 @@ import TodoLeftCounter from './TodoLeftCounter';
 import TodoDeleteCompeletedBtn from './TodoDeleteCompeletedBtn';
 
 import '../assets/reset.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const sagaMiddleware = createSagaMiddleware();
@@ -59,6 +61,7 @@ const App = props => {
             <TodoDeleteCompeletedBtn />
           </TodosContainer>
         </MainContainer>
+        <ToastContainer />
       </AppContainer>
     </Provider>
   );

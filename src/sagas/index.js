@@ -31,16 +31,16 @@ export function* changeTodoDone(action) {
     yield call(axios.put, `https://jsonplaceholder.typicode.com/todos/${todoId}`, action.payload);
     yield put({type: TODOS_CHANGE_DONE_SUCCESS, payload: todoId});
   } catch (error) {
-    yield put({type: TODOS_CHANGE_DONE_ERROR, payload: error});
+    yield put({type: TODOS_CHANGE_DONE_ERROR, payload: action.payload.title});
   }
 }
 
 export function* deleteTodo(action) {
   try {
-    yield call(axios.delete, `https://jsonplaceholder.typicode.com/todos/${action.payload}`);
-    yield put({type: TODOS_DELETE_SUCCESS, payload: action.payload});
+    yield call(axios.delete, `https://jsonplaceholder.typicode.com/todos/${action.payload.id}`);
+    yield put({type: TODOS_DELETE_SUCCESS, payload: action.payload.id});
   } catch (error) {
-    yield put({type: TODOS_DELETE_ERROR, payload: error});
+    yield put({type: TODOS_DELETE_ERROR, payload: action.payload.title});
   }
 }
 

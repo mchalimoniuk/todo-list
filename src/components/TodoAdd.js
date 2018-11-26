@@ -3,6 +3,7 @@ import { TODOS_CREATE_START, TODOS_NEW_TODO_TITLE_CHANGE } from '../constants/Ac
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 
 import add from '../assets/plus.svg';
 
@@ -44,7 +45,9 @@ const TodoAdd = props => {
     if(todosCount < 10) {
       props.createTodo(props.newTodoTitle);
     } else {
-      alert(maxTotoCountError);
+      toast.error(maxTotoCountError, {
+        position: toast.POSITION.BOTTOM_CENTER
+      });
     }
   }
 

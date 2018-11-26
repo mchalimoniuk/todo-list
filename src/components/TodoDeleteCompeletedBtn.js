@@ -21,8 +21,9 @@ const DeleteCompletedBtn = styled.button`
 const TodoDeleteCompeletedBtn = props => {
   const dispatchDeleteAllCompletedTodos = () => {
     props.todos.forEach(todo => {
-      if (todo.completed)
-        props.deleteTodo(todo.id);
+      if (todo.completed) {
+        props.deleteTodo({ id: todo.id, title: todo.title });
+      }
     });
   }
 
